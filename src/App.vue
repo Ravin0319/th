@@ -1,7 +1,11 @@
 <template>
   <div id="app-wrapper">
     <div class="container">
-      <listing-card/>
+      <div class="row">
+        <div class="col-xs-12 col-md-3" v-for="(list, index) in listing" :key="index">
+          <listing-card :title="list.title" :id="list.id" :config="list.config" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
