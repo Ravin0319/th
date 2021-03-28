@@ -1,6 +1,15 @@
 <template>
   <div>
 
+    <!-- <div>
+      <div>
+        <p v-b-toggle.accordion-1>Title</p>
+      </div>
+      <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+        body...
+      </b-collapse>
+    </div> -->
+
     <div v-if="response.loading">
       <spinner/>
     </div>
@@ -10,7 +19,7 @@
       <div class="list-title-wrapper">
         <div class="row">
           <div class="col">
-            <div class="list-title-arrow">
+            <div class="list-title-arrow" v-b-toggle="id">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
               </svg>
@@ -25,64 +34,68 @@
         </div>
       </div>
 
-      <div class="listing-card" v-for="(list, index) in response.listing" :key="index">
+      <b-collapse :id="id" visible>
 
-        <div class="card-head">
-          <div class="row">
-            <div class="col">
-              <div class="card-label">Ref/Po:</div>
-              <div class="card-value">{{ list.load_ref }}</div>
-            </div>
-            <div class="col text-right">
-              <div class="card-label" v-if="id === 'assigned_orders'">To Pickup</div>
-              <div class="card-value">
-                <!-- {{ list.created_at }} -->
-                JAN 5
+        <div class="listing-card" v-for="(list, index) in response.listing" :key="index">
+
+          <div class="card-head">
+            <div class="row">
+              <div class="col">
+                <div class="card-label">Ref/Po:</div>
+                <div class="card-value">{{ list.load_ref }}</div>
+              </div>
+              <div class="col text-right">
+                <div class="card-label" v-if="id === 'assigned_orders'">To Pickup</div>
+                <div class="card-value">
+                  <!-- {{ list.created_at }} -->
+                  JAN 5
+                </div>
               </div>
             </div>
           </div>
+
+          <div class="card-body">
+
+            <div class="row mb-2">
+              <div class="col text-center">
+                <div class="card-value">Order {{ list.order_number }}</div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col text-center">
+                <div class="card-label">Created at</div>
+                <div class="card-value">{{ list.created_at }}</div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col text-center">
+                <div class="card-label">Customer Name</div>
+                <div class="card-value">{{ list.customer_name }}</div>
+              </div>
+              <div class="col text-center">
+                <div class="card-label">Phone Number</div>
+                <div class="card-value">{{ list.phone_number }}</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col text-center">
+                <div class="card-label">Price to Customer</div>
+                <div class="card-value">{{ list.order_price_formatted }}</div>
+              </div>
+              <div class="col text-center">
+                <div class="card-label">Tahmeel Fee</div>
+                <div class="card-value">{{ list.tahmeel_fee_in_cents }}</div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <div class="card-body">
-
-          <div class="row mb-2">
-            <div class="col text-center">
-              <div class="card-value">Order {{ list.order_number }}</div>
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col text-center">
-              <div class="card-label">Created at</div>
-              <div class="card-value">{{ list.created_at }}</div>
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col text-center">
-              <div class="card-label">Customer Name</div>
-              <div class="card-value">{{ list.customer_name }}</div>
-            </div>
-            <div class="col text-center">
-              <div class="card-label">Phone Number</div>
-              <div class="card-value">{{ list.phone_number }}</div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col text-center">
-              <div class="card-label">Price to Customer</div>
-              <div class="card-value">{{ list.order_price_formatted }}</div>
-            </div>
-            <div class="col text-center">
-              <div class="card-label">Tahmeel Fee</div>
-              <div class="card-value">{{ list.tahmeel_fee_in_cents }}</div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+      </b-collapse>
 
     </div>
 
@@ -161,6 +174,7 @@ export default {
   border: 1px solid #545454;
   padding: 10px;
   border-radius: 6px;
+  margin-bottom: 10px;
 
   //Title - Accordion
   .list-title-wrapper {
@@ -168,7 +182,8 @@ export default {
     border-bottom: 3px solid #5ADCC0;
     margin-bottom: 10px;
     .list-title-arrow {
-
+      border: none;
+      outline: none;
     }
     .list-title {
       text-transform: uppercase;
@@ -185,7 +200,7 @@ export default {
   //Listing Card
   .listing-card {
     background-color: #545454;
-    margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 5px;
 
     //Card Head
