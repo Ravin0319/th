@@ -24,17 +24,17 @@ export default {
       listing: [
         {
           title: 'Pending',
-          id: 'pending',
+          id: 'pending_orders',
           config: {
-            endpoint: 'https://api.stagingtahmeelapp.com/technical_interview/orders/pending',
+            url: 'https://api.stagingtahmeelapp.com/technical_interview/orders/pending',
             method: 'GET'
           }
         },
         {
           title: 'Assigned',
-          id: 'assigned',
+          id: 'assigned_orders',
           config: {
-            endpoint: 'https://api.stagingtahmeelapp.com/technical_interview/orders/assigned',
+            url: 'https://api.stagingtahmeelapp.com/technical_interview/orders/assigned',
             method: 'GET'
           }
         }

@@ -1,9 +1,11 @@
 <template>
-  <div id="">
-    card
+  <div class="listing-card">
+
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     title: {
@@ -21,14 +23,34 @@ export default {
   },
   data() {
     return {
+      response: {
+        listing: [],
+        loading: true,
+        error: false
+      }
+    }
+  },
+  methods: {
+    getListing() {
+
+      axios(this.config).then(response => {
+        this.response.listing = response.data[this.id]
+        this.response.loading = false
+      }).catch(e => {
+        console.log(e);
+        this.response.loading = false
+        this.response.error = true
+      })
+
     }
   },
   mounted() {
-    console.log(this.title);
-    console.log(this.id);
-    console.log(this.config);
+    this.getListing();
   }
 }
 </script>
 <style lang="scss" scoped>
+.listing-card {
+
+}
 </style>
