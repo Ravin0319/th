@@ -35,7 +35,7 @@
                 <div class="card-label">Ref/Po:</div>
                 <div class="card-value">{{ list.load_ref }}</div>
               </div>
-              <div class="col text-right">
+              <div class="col text-right align-self-end">
                 <div class="card-label" v-if="id === 'assigned_orders'">To Pickup</div>
                 <div class="card-value">
                   {{ id === 'assigned_orders' ? new Date(list.created_at).toLocaleString('default', { month: 'long' }).substring(0, 3) : new Date(list.created_at).toLocaleString('default', { month: 'long' }) }} {{ new Date(list.created_at).getUTCDate() }}
@@ -254,6 +254,11 @@ export default {
       font-weight: 300;
     }
   }
+
+  .listing-card:last-child {
+    box-shadow: inset 0px 11px 8px -10px black, inset 0px -20px 15px -22px black;
+  }
+  
   //Listing Card
 
 }
