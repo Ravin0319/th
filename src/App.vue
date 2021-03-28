@@ -1,13 +1,42 @@
 <template>
   <div id="app-wrapper">
-
+    <div class="container">
+      <listing-card/>
+    </div>
   </div>
 </template>
 
 <script>
 
+import ListingCard from "./components/listing/Card.vue";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    ListingCard
+  },
+  data() {
+    return {
+      listing: [
+        {
+          title: 'Pending',
+          id: 'pending',
+          config: {
+            endpoint: 'https://api.stagingtahmeelapp.com/technical_interview/orders/pending',
+            method: 'GET'
+          }
+        },
+        {
+          title: 'Assigned',
+          id: 'assigned',
+          config: {
+            endpoint: 'https://api.stagingtahmeelapp.com/technical_interview/orders/assigned',
+            method: 'GET'
+          }
+        }
+      ]
+    }
+  }
 };
 </script>
 
