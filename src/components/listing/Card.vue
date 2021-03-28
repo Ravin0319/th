@@ -2,13 +2,7 @@
   <div>
 
     <div v-if="response.loading">
-      <div class="row">
-        <div class="col text-center">
-          <div class="loading-text">
-            Loading...
-          </div>
-        </div>
-      </div>
+      <spinner/>
     </div>
 
     <div class="listing-wrapper" v-else-if="!response.loading && !response.error">
@@ -106,8 +100,12 @@
 </template>
 <script>
 import axios from 'axios'
+import Spinner from './Spinner.vue'
 
 export default {
+  components: {
+    Spinner
+  },
   props: {
     title: {
       required: true,
@@ -136,7 +134,7 @@ export default {
 
       axios(this.config).then(response => {
         this.response.listing = response.data[this.id]
-        // this.response.loading = false
+        this.response.loading = false
       }).catch(e => {
         console.log(e);
         this.response.loading = false
