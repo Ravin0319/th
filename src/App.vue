@@ -2,7 +2,7 @@
   <div id="app-wrapper">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-md-3" v-for="(list, index) in listing" :key="index">
+        <div class="col-xs-12 col-md-4" v-for="(list, index) in listing" :key="index">
           <listing-card :title="list.title" :id="list.id" :config="list.config" />
         </div>
       </div>
@@ -49,7 +49,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
+
+}
+#app-wrapper {
+  background-color: #2A2A2A;
+  padding: 20px 0;
 }
 </style>
