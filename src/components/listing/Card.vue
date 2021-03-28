@@ -176,6 +176,11 @@ export default {
       border: none;
       outline: none;
     }
+    .not-collapsed {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
     .list-title {
       text-transform: uppercase;
     }
