@@ -45,14 +45,25 @@ export default {
 </script>
 
 <style>
-#app {
+#app-wrapper {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-}
-#app-wrapper {
-  background-color: #2A2A2A;
   padding: 20px 0;
+  height: 100vh;
 }
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(90,220,192,1);
+}
+
 </style>

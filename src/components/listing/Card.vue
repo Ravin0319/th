@@ -144,7 +144,14 @@ export default {
     }
   },
   mounted() {
-    this.getListing();
+
+    let vm = this
+
+    //Adding a 1 sec delay to show the Loader :)
+    setTimeout(function(){
+      vm.getListing();
+    }, 1000);
+
   }
 }
 </script>
