@@ -1,15 +1,6 @@
 <template>
   <div>
 
-    <!-- <div>
-      <div>
-        <p v-b-toggle.accordion-1>Title</p>
-      </div>
-      <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
-        body...
-      </b-collapse>
-    </div> -->
-
     <div v-if="response.loading">
       <spinner/>
     </div>
