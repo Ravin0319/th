@@ -38,8 +38,7 @@
               <div class="col text-right">
                 <div class="card-label" v-if="id === 'assigned_orders'">To Pickup</div>
                 <div class="card-value">
-                  <!-- {{ list.created_at }} -->
-                  JAN 5
+                  {{ id === 'assigned_orders' ? new Date(list.created_at).toLocaleString('default', { month: 'long' }).substring(0, 3) : new Date(list.created_at).toLocaleString('default', { month: 'long' }) }} {{ new Date(list.created_at).getUTCDate() }}
                 </div>
               </div>
             </div>
@@ -56,7 +55,9 @@
             <div class="row mb-2">
               <div class="col text-center">
                 <div class="card-label">Created at</div>
-                <div class="card-value">{{ list.created_at }}</div>
+                <div class="card-value">
+                   {{ dateCreatedAt(list.created_at) }}
+                </div>
               </div>
             </div>
 
@@ -78,7 +79,9 @@
               </div>
               <div class="col text-center">
                 <div class="card-label">Tahmeel Fee</div>
-                <div class="card-value">{{ list.tahmeel_fee_in_cents }}</div>
+                <div class="card-value">
+                  {{ (list.tahmeel_fee_in_cents / 100).toLocaleString('az-AE', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} AED
+                </div>
               </div>
             </div>
 
@@ -134,6 +137,18 @@ export default {
     }
   },
   methods: {
+    dateCreatedAt(d) {
+
+      let dateObj = new Date(d),
+          month = ("0" + (dateObj.getUTCMonth() + 1)).slice(-2),
+          day = dateObj.getUTCDate(),
+          hours = dateObj.getUTCHours(),
+          minutes = dateObj.getUTCMinutes();
+
+
+      return day + '/' + month + ' ' + hours + ':' + minutes
+
+    },
     getListing() {
 
       axios(this.config).then(response => {
@@ -210,14 +225,15 @@ export default {
       .card-label {
         color: #545454;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 500;
         margin-bottom: 5px;
+        letter-spacing: 0.05em;
       }
 
       .card-value {
         color: #545454;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 500;
       }
 
     }
